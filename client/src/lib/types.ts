@@ -1,4 +1,5 @@
 ﻿export interface UserType {
+  _id: string;
   name: string;
   email: string;
   password: string;
@@ -7,6 +8,7 @@
 }
 
 export interface TagType {
+  _id: string;
   name: string;
   color: string;
   user: UserType;
@@ -15,6 +17,7 @@ export interface TagType {
 }
 
 export interface TaskType {
+  _id: string;
   title: string;
   description: string;
   priority: string;
@@ -27,9 +30,3 @@ export interface TaskType {
 }
 
 export type Tab = "home" | "today" | "upcoming" | "completed";
-
-export type Color = {
-  label: string;
-  name: string;
-  value: string;
-}

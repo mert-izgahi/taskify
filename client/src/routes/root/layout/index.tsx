@@ -8,11 +8,13 @@ import { useMobile } from "@/hooks/use-mobile";
 import Modal from "@/components/modal";
 import { useModalStore } from "@/store/use-modal";
 import TagForm from "@/components/tag-form";
+import { useTagsStore } from "@/store/use-tags";
 
 const Layout = () => {
     const { isAuthenticated, data } = useAuthStore();
     const sidebarStore = useSidebarStore();
     const modalStore = useModalStore();
+    const tagsStore = useTagsStore();
     const { isMobile } = useMobile();
 
     useEffect(() => {
@@ -39,8 +41,8 @@ const Layout = () => {
 
             <main className="flex-1 p-4">
                 <Outlet />
-                <Modal title="New Tag" description="Create a new tag" isOpen={modalStore.isOpen} close={modalStore.close}>
-                    <TagForm mode="create" />
+                <Modal title={tagsStore.mode === "create" ? "Create Tag" : "Update Tag"} description={tagsStore.mode === "create" ? "Create a new tag" : "Update a tag"} isOpen={modalStore.isOpen} close={modalStore.close}>
+                    <TagForm />
                 </Modal>
             </main>
         </div>

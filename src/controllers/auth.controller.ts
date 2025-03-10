@@ -52,6 +52,8 @@ export const signIn = async (req: Request, res: Response) => {
 
 
     const token = generateToken(user);
+    console.log(token);
+    
     res
       .status(200)
       .cookie("token", token, { httpOnly: true, sameSite: "lax" })
