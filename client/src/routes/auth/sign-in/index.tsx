@@ -5,9 +5,13 @@ import { Form, FormField, FormControl, FormDescription, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "@/store/use-auth";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Loader2, TriangleAlert } from "lucide-react";
 
 
 const Page = () => {
+    const { isPending, error, signIn } = useAuthStore();
     const form = useForm<SignInSchema>({
         resolver: zodResolver(signInSchema),
         defaultValues: {
@@ -16,13 +20,20 @@ const Page = () => {
         }
     })
 
-    const onSubmit = (data: SignInSchema) => {
-        console.log(data)
+    const onSubmit = async(data: SignInSchema) => {
+        await signIn(data);
     }
 
     return <div>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8">
+                {
+                    error && <Alert variant="destructive">
+                        <TriangleAlert className="mr-4 h-4 w-4" />
+                        <AlertTitle>Error</AlertTitle>
+                        <AlertDescription>{error}</AlertDescription>
+                    </Alert>
+                }
                 <FormField
                     control={form.control}
                     name="email"
@@ -47,7 +58,7 @@ const Page = () => {
                         <FormItem>
                             <FormLabel>Password</FormLabel>
                             <FormControl>
-                                <Input placeholder="Password" {...field} />
+                                <Input type="password" placeholder="Password" {...field} />
                             </FormControl>
                             <FormDescription>
                                 Must be at least 8 characters.
@@ -58,6 +69,9 @@ const Page = () => {
                 />
 
                 <Button type="submit">
+                    {
+                        isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    }
                     Sign In
                 </Button>
                 <Button asChild variant={"outline"}>
