@@ -8,15 +8,15 @@ function UserButton() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost">Account</Button>
+                <Button variant="ghost" className="cursor-pointer">Account</Button>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent>
-                <DropdownMenuItem>
+            <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem className="cursor-pointer">
                     <Settings2 className="mr-2 h-4 w-4" />
                     Settings
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={async () => await signOut()}>
+                <DropdownMenuItem className="cursor-pointer" onClick={async () => await signOut()}>
                     <ArrowLeftSquare className="mr-2 h-4 w-4" />
                     Sign out
                 </DropdownMenuItem>
