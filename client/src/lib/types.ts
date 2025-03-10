@@ -1,0 +1,27 @@
+﻿export interface UserType {
+  name: string;
+  email: string;
+  password: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface TagType {
+  name: string;
+  color: string;
+  user: UserType;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface TaskType {
+  title: string;
+  description: string;
+  priority: string;
+  completed: boolean;
+  dueDate: Date;
+  user: string;
+  tags: TagType[];
+  createdAt: Date;
+  updatedAt: Date;
+}
