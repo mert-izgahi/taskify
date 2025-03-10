@@ -25,7 +25,7 @@ export const useAuthStore = create<IAuthStore>()(
       signIn: async (data) => {
         try {
           set({ isPending: true });
-          const res = await axiosInstance.post("/auth/sign-in", data);
+          const res = await axiosInstance.post("/api/sign-in", data);
           set({ data: res.data, isAuthenticated: true });
           set({ isPending: false });
         } catch (error: any) {
@@ -35,6 +35,10 @@ export const useAuthStore = create<IAuthStore>()(
             "Something went wrong";
 
           set({ isPending: false, error: message });
+
+          setTimeout(() => {
+            set({ error: null });
+          }, 3000);
         } finally {
           set({ isPending: false });
         }
@@ -42,7 +46,7 @@ export const useAuthStore = create<IAuthStore>()(
       signUp: async (data) => {
         try {
           set({ isPending: true });
-          const res = await axiosInstance.post("/auth/sign-up", data);
+          const res = await axiosInstance.post("/api/sign-up", data);
           set({ data: res.data, isAuthenticated: true });
           set({ isPending: false });
         } catch (error: any) {
@@ -50,15 +54,18 @@ export const useAuthStore = create<IAuthStore>()(
             error.response.data.message ||
             error.message ||
             "Something went wrong";
-
           set({ isPending: false, error: message });
+
+          setTimeout(() => {
+            set({ error: null });
+          }, 3000);
         } finally {
           set({ isPending: false });
         }
       },
       signOut: async () => {
         try {
-          await axiosInstance.post("/auth/sign-out");
+          await axiosInstance.post("/api/sign-out");
           set({ data: null, isAuthenticated: false });
         } catch (error: any) {
           const message =
@@ -67,6 +74,10 @@ export const useAuthStore = create<IAuthStore>()(
             "Something went wrong";
 
           set({ isPending: false, error: message });
+
+          setTimeout(() => {
+            set({ error: null });
+          }, 3000);
         } finally {
           set({ isPending: false });
         }
@@ -74,7 +85,7 @@ export const useAuthStore = create<IAuthStore>()(
       updateMe: async (data) => {
         try {
           set({ isPending: true });
-          const res = await axiosInstance.put("/auth/update-me", data);
+          const res = await axiosInstance.put("/api/update-me", data);
           set({ data: res.data, isAuthenticated: true });
           set({ isPending: false });
         } catch (error: any) {
@@ -84,6 +95,10 @@ export const useAuthStore = create<IAuthStore>()(
             "Something went wrong";
 
           set({ isPending: false, error: message });
+
+          setTimeout(() => {
+            set({ error: null });
+          }, 3000);
         } finally {
           set({ isPending: false });
         }
