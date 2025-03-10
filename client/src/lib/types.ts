@@ -25,3 +25,5 @@ export interface TaskType {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type Tab = "home" | "today" | "upcoming" | "completed";
