@@ -27,3 +27,9 @@ export interface TaskType {
 }
 
 export type Tab = "home" | "today" | "upcoming" | "completed";
+
+export type Color = {
+  label: string;
+  name: string;
+  value: string;
+}

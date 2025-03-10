@@ -9,5 +9,13 @@ export const signUpSchema = signInSchema.extend({
   name: z.string().min(1, "Name is required"),
 });
 
+export const tagSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  color: z.string().min(1, "Color is required"),
+});
+
+
+
 export type SignInSchema = TypeOf<typeof signInSchema>;
 export type SignUpSchema = TypeOf<typeof signUpSchema>;
+export type TagSchema = TypeOf<typeof tagSchema>;

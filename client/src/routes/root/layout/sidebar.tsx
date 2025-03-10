@@ -2,6 +2,7 @@
 import { useMobile } from "@/hooks/use-mobile";
 import { Tab } from "@/lib/types";
 import { cn } from "@/lib/utils"
+import { useModalStore } from "@/store/use-modal";
 import { useSidebarStore } from "@/store/use-sidebar"
 import { useTabsStore } from "@/store/use-tabs";
 import { Calendar as TodayIcon, Home as HomeIcon, Grid as UpcomingIcon, Plus, CheckCircle as CompleteIcon } from "lucide-react";
@@ -24,7 +25,7 @@ function SidebarItem({ icon: Icon, label, tab }: { icon: any, label: string, tab
 function Sidebar() {
     const sidebarStore = useSidebarStore();
     const { isMobile } = useMobile();
-
+    const modalStore = useModalStore();
     const items = [
         { icon: HomeIcon, label: "Home", tab: "home" },
         { icon: TodayIcon, label: "Today", tab: "today" },
@@ -63,7 +64,7 @@ function Sidebar() {
                                 <div className="flex-1 flex flex-col gap-2">
                                     <div className="px-4 flex items-center justify-between">
                                         <h2 className="font-medium text-sm">Tags</h2>
-                                        <Button size={"icon"} variant={"ghost"} className="cursor-pointer">
+                                        <Button type="button" size={"icon"} variant={"ghost"} className="cursor-pointer" onClick={modalStore.open}>
                                             <Plus className="w-4 h-4" />
                                         </Button>
                                     </div>
